@@ -1,4 +1,4 @@
-<header class="z-10 py-4 bg-white shadow-md dark:bg-gray-800">
+<header class="z-10 py-4 bg shadow-md dark:bg-gray-800">
     <div class="container flex items-center justify-end h-full px-6 mx-auto text-red-600 dark:text-red-300">
         <!-- Mobile hamburger -->
         <button class=" p-1 mr-5 -ml-1 rounded-md md:hidden focus:outline-none focus:shadow-outline-red"
@@ -13,13 +13,13 @@
         <nav>
         </nav>
         <div class="flex justify-center flex-1">
-            <a class="inline-flex items-center text-sm mr-5 font-semibold transition-colors duration-150 "
+            <a class="inline-flex items-center text-sm mr-5 font-semibold transition-colors duration-150 text-gray-700 dark:text-gray-200"
                 href="{{ route('masyarakat-lihat') }}">
 
                 <span class="ml-4">Dashboard</span>
             </a>
 
-            <a class="inline-flex items-center text-sm mr-5 font-semibold transition-colors duration-150 "
+            <a class="inline-flex items-center text-sm mr-5 font-semibold transition-colors duration-150 text-gray-700 dark:text-gray-200 "
                 href="{{ route('pengaduan.create') }}">
 
                 <span class="ml-4">Pengaduan</span>
@@ -51,8 +51,6 @@
       </div> --}}
 
 
-
-
         </div>
 
         <ul class="flex items-center flex-shrink-2 space-x-6">
@@ -74,7 +72,7 @@
                     </template>
                 </button>
             </li>
-            <li class="flex">
+            <li class="flex mt-3 font-semibold">
                 <p>{{ Auth::user()->name }} </p>
             </li>
             <!-- Profile menu -->

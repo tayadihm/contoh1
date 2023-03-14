@@ -24,6 +24,7 @@
         "@fortawesome/fontawesome-free": "^6.3.0",
         "@tailwindcss/postcss7-compat": "^2.0.2",
         "autoprefixer": "^9.8.6",
+        "bootstrap-icons": "^1.10.3",
         "postcss-import": "^14.0.0",
         "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.2"
     }

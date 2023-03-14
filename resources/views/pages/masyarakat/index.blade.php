@@ -5,9 +5,9 @@
 @endsection
 @section('content')
     <main class="h-full pb-16 overflow-y-auto">
-        {{-- @foreach ($liat as $li)
- <li>{{ $li->nik }}</li>
-  @endforeach --}}
+        {{-- @foreach ($user as $li)
+            <li>{{ $li->nik }}</li>
+        @endforeach --}}
         <div class="container px-6 mx-auto grid">
             <h2 class="my-6 text-2xl font-semibold text-center text-gray-700 dark:text-gray-200">
             </h2>
@@ -45,13 +45,18 @@
                             value="{{ old('phone_nasabah') }}" required>
                     </div>
                     <div class="form-group">
-                        <label for="jenis_pengaduan" class="text-gray-700 dark:text-gray-400">Jenis Pengaduan</label>
+                        <label for="jenis_pengaduan" class="dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700">Jenis
+                            Pengaduan</label>
                         <select name="jenis_pengaduan" id="jenis_pengaduan"
                             class="form-control dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700" required>
-                            <option selected>-Pilih Jenis Pengaduan-</option>
-                            <option value="KJP">KJP</option>
-                            <option value="KJMU">KJMU</option>
-                            <option value="BPMS">BPMS</option>
+                            <option selected disabled class="dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700">
+                                -Pilih Jenis Pengaduan-</option>
+                            <option value="KJP" class="dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700">KJP
+                            </option>
+                            <option value="KJMU" class="dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700">KJMU
+                            </option>
+                            <option value="BPMS" class="dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700">BPMS
+                            </option>
                         </select>
                     </div>
                     <div class="form-group">

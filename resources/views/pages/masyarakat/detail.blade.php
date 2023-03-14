@@ -12,8 +12,8 @@
 
             <div class="w-full max-w-full">
                 <div
-                    class="relative flex flex-col min-w-0 break-words bg-white border-0 shadow-soft-xl rounded-2xl bg-clip-border">
-                    <div class="table-responsive dark:bg-gray-700 dark:text-gray-300">
+                    class="relative flex flex-col min-w-0 break-words bg-white border-0 shadow-soft-xl rounded-lg bg-clip-border">
+                    <div class="table-responsive shadow-soft-xl dark:bg-gray-700 dark:text-gray-300 py-4 px-4">
                         @if ($errors->any())
                             <div class="alert alert-danger">
                                 <ul>
@@ -24,19 +24,20 @@
                             </div>
                         @endif
 
-                        <table class="table table-flush text-slate-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 pengaduan-masyarakat-list">
-                            <thead class="thead-light dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300">
+                        <table
+                            class="table table-borderless w-full whitespace-no-wrap text-slate-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-400 pengaduan-masyarakat-list">
+                            <thead>
                                 <tr>
-                                    <th class="px-6 py-2 text-md text-gray-500">File</th>
-                                    <th class="px-6 py-2 text-md text-gray-500">Jenis Pengaduan</th>
-                                    <th class="px-6 py-2 text-md text-gray-500">Tanggal</th>
-                                    <th class="px-6 py-2 text-md text-gray-500">Status</th>
-                                    <th class="px-6 py-2 text-md text-gray-500">Aksi</th>
+                                    <th class="px-6 py-2 text-sm dark:text-gray-300">Berkas</th>
+                                    <th class="px-6 py-2 text-sm dark:text-gray-300">Nomor Rekening Nasabah</th>
+                                    <th class="px-6 py-2 text-sm dark:text-gray-300">Nama Nasabah</th>
+                                    <th class="px-6 py-2 text-sm dark:text-gray-300">Jenis Pengaduan</th>
+                                    <th class="px-6 py-2 text-sm dark:text-gray-300">Tanggal</th>
+                                    <th class="px-6 py-2 text-sm dark:text-gray-300">Status</th>
+                                    <th class="px-6 py-2 text-sm dark:text-gray-300">Aksi</th>
                                 </tr>
                             </thead>
-                            <tbody class="dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300">
-                                <tr class="font-normal leading-normal text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300">
-                                </tr>
+                            <tbody class="dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 text-sm">
                             </tbody>
                         </table>
                     </div>
@@ -47,22 +48,28 @@
 @endsection
 
 @push('after-script')
-    <<script type="text/javascript">
+    <script type="text/javascript">
         $(function() {
             var table = $('.pengaduan-masyarakat-list').DataTable({
                 processing: true,
                 serverSide: true,
                 ajax: "{{ route('masyarakat-lihat') }}",
                 order: [
-                    [1, 'desc']
+                    [4, 'desc']
                 ],
                 columns: [{
                         data: 'ktp',
                         name: 'ktp',
-                        render: function (data, type, full, meta) {
-                            return '<a href="{{ asset('storage') }}/' + data +
-                                '" target="_blank"><i class="fa fa-file-pdf-o"></i></a>';
-                        }
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: 'norek_nasabah',
+                        name: 'norek_nasabah'
+                    },
+                    {
+                        data: 'name',
+                        name: 'name'
                     },
                     {
                         data: 'jenis_pengaduan',
