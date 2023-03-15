@@ -27,7 +27,8 @@
                         <table
                             class="table table-borderless w-full whitespace-no-wrap text-slate-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-400 pengaduan-masyarakat-list">
                             <thead>
-                                <tr>
+                                <tr
+                                    class="text-xs font-semibold tracking-wide text-left text-gray-500 border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                                     <th class="px-6 py-2 text-sm dark:text-gray-300">Berkas</th>
                                     <th class="px-6 py-2 text-sm dark:text-gray-300">Nomor Rekening Nasabah</th>
                                     <th class="px-6 py-2 text-sm dark:text-gray-300">Nama Nasabah</th>

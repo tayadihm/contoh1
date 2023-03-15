@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Carbon\Carbon;
 use App\Models\Pengaduan;
 use App\Models\Tanggapan;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -41,7 +43,7 @@ class PengaduanController extends Controller
                 }
             })
             ->addColumn('action', function($row){
-                $actionBtn = '<a href="'.route('pengaduan.show', $row->id).'" class="btn btn-success btn-sm">Lihat</a>';
+                $actionBtn = '<a href="'.route('pengaduans.show', $row->id).'" class="btn btn-success btn-sm">Lihat</a>';
                 return $actionBtn;
             })
             ->rawColumns(['berkas', 'status', 'action'])

@@ -1,5 +1,5 @@
 <!-- Desktop sidebar -->
-<aside class="z-20 hidden w-64 overflow-y-auto bg-white dark:bg-gray-800 md:block flex-shrink-0">
+<aside class="z-20 hidden w-64 overflow-y-auto dark:bg-gray-800 md:block flex-shrink-0">
     <div class="py-4 text-gray-500 dark:text-gray-400">
         <img src="{{ asset('img/logo.svg') }}" alt=""
             class="inline-flex ml-3 items-center transform transition hover:scale-125 duration-300 ease-in-out" />
@@ -7,11 +7,11 @@
             APLIKASIKU
         </a>
         <ul class="mt-6">
-            <li class="relative px-6 py-3">
+            <li class="relative px-6 py-2">
                 <span
                     class="{{ request()->routeIs('dashboard') ? 'absolute inset-y-0 left-0 w-1 bg-red-600 rounded-tr-lg rounded-br-lg' : '' }} "
                     aria-hidden="true"></span>
-                <a class="inline-flex items-center w-full text-sm font-semibold  transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                <a class="inline-flex items-center w-full text-sm font-semibold  transition-colors duration-150 text-gray-600 hover:text-gray-800 dark:text-gray-200 dark:hover:text-gray-700"
                     href="{{ route('dashboard') }} ">
                     <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                         <path
@@ -22,11 +22,11 @@
             </li>
         </ul>
         <ul>
-            <li class="relative px-6 py-3">
+            <li class="relative px-6 py-2">
                 <span
                     class="{{ request()->routeIs('pengaduans.index') ? 'absolute inset-y-0 left-0 w-1 bg-red-600 rounded-tr-lg rounded-br-lg' : '' }} "
                     aria-hidden="true"></span>
-                <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 text-gray-600 hover:text-gray-800 dark:text-gray-200 dark:hover:text-gray-700"
                     href="{{ route('pengaduans.index') }}">
                     <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd"
@@ -38,11 +38,11 @@
             </li>
         </ul>
         <ul>
-            <li class="relative px-6 py-3">
+            <li class="relative px-6 py-2">
                 <span
                     class="{{ request()->is('admin/masyarakat') ? 'absolute inset-y-0 left-0 w-1 bg-red-600 rounded-tr-lg rounded-br-lg' : '' }} "
                     aria-hidden="true"></span>
-                <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 text-gray-600 hover:text-gray-800 dark:text-gray-200 dark:hover:text-gray-700"
                     href="{{ url('admin/masyarakat') }}">
                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                         <path
@@ -55,11 +55,11 @@
         </ul>
         @if (Auth::user()->roles == 'ADMIN')
             <ul>
-                <li class="relative px-6 py-3">
+                <li class="relative px-6 py-2">
                     <span
                         class="{{ request()->is('admin/petugas') ? 'absolute inset-y-0 left-0 w-1 bg-red-600 rounded-tr-lg rounded-br-lg' : '' }} "
                         aria-hidden="true"></span>
-                    <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                    <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 text-gray-600 hover:text-gray-800 dark:text-gray-200 dark:hover:text-gray-700"
                         href="{{ route('petugas.index') }}">
                         <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
                             <path
@@ -71,11 +71,11 @@
             </ul>
         @endif
         <ul>
-            <li class="relative px-6 py-3">
+            <li class="relative px-6 py-2">
                 <span
                     class="{{ request()->is('admin/laporan') ? 'absolute inset-y-0 left-0 w-1 bg-red-600 rounded-tr-lg rounded-br-lg' : '' }} "
                     aria-hidden="true"></span>
-                <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 text-gray-600 hover:text-gray-800 dark:text-gray-200 dark:hover:text-gray-700"
                     href="{{ url('admin/laporan') }}">
                     <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd"
@@ -96,7 +96,7 @@
     x-transition:leave="transition ease-in-out duration-150" x-transition:leave-start="opacity-100"
     x-transition:leave-end="opacity-0"
     class="fixed inset-0 z-10 flex items-end bg-black bg-opacity-50 sm:items-center sm:justify-center"></div>
-<aside class="fixed inset-y-0 z-20 flex-shrink-0 w-64 mt-16 overflow-y-auto bg-white dark:bg-gray-800 md:hidden"
+<aside class="fixed inset-y-0 z-20 flex-shrink-0 w-64 mt-16 overflow-y-auto dark:bg-gray-800 md:hidden"
     x-show="isSideMenuOpen" x-transition:enter="transition ease-in-out duration-150"
     x-transition:enter-start="opacity-0 transform -translate-x-20" x-transition:enter-end="opacity-100"
     x-transition:leave="transition ease-in-out duration-150" x-transition:leave-start="opacity-100"
