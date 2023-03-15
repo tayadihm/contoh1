@@ -7,9 +7,6 @@
 @section('content')
     <main class="h-full pb-16 overflow-y-auto">
         <div class="container grid px-6 mx-auto">
-            <h2 class="my-6 text-2xl font-semibold text-center text-gray-700 dark:text-gray-200">
-                Detail Pengaduan
-            </h2>
 
             <div class="w-full mb-8 overflow-hidden rounded-lg shadow-xs">
                 <div class="w-full">
@@ -17,13 +14,12 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <h3 class="my-3 font-semibold mx-3 dark:text-gray-300">Berkas</h3>
-                                <img src="/assets/img/pdf-svg.svg" class="img-fluid mb-2 w-auto" loading="lazy"
-                                    alt="KTP">
-                                <a href="{{ Storage::url($item->ktp) }}" target="_blank"
+                                <img src="/assets/img/pdf-svg.svg" class="img-fluid mb-2 w-auto" loading="lazy" alt="Berkas">
+                                <a href="{{ Storage::url($item->berkas) }}" target="_blank"
                                     class="btn btn-primary btn-sm w-full">Download</a>
                             </div>
                             <div class="col-md-9">
-                                <h3 class="my-3 dark:text-gray-300">Project Details</h3>
+                                <h3 class="my-3 dark:text-gray-300">Detail Pengaduan</h3>
                                 <ul>
                                     <div class="form-group row">
                                         <label class="col-sm-4 col-form-label dark:text-gray-300">Jenis Pengaduan :</label>
@@ -39,6 +35,14 @@
                                             <input type="text"
                                                 class="form-input col-sm-9 dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700"
                                                 value="{{ $ite->name }}" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-4 col-form-label dark:text-gray-300">NIK Nasabah :</label>
+                                        <div class="col-sm-7">
+                                            <input type="text"
+                                                class="form-input col-sm-9 dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700"
+                                                value="{{ $ite->id_nasabah }}" disabled>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -72,7 +76,7 @@
                                         <div class="col-sm-7">
                                             <input type="text"
                                                 class="form-input col-sm-9 bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700"
-                                                value="{{ Config::get('constants.kantor_cabang') }}" disabled>
+                                                value="{{ $ite->user->cabang }}" disabled>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -89,7 +93,7 @@
                                         <div class="col-sm-7">
                                             <input type="text"
                                                 class="form-input col-sm-9 dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700"
-                                                value="{{ $ite->created_at->format('l, d F Y - H:i:s') }}" disabled>
+                                                value="{{ $ite->created_at->translatedFormat('l, d F Y - H:i:s') }}" disabled>
                                         </div>
                                     </div>
                                     <div class="form-group row">

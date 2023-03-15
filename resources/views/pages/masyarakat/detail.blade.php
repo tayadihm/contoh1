@@ -58,8 +58,8 @@
                     [4, 'desc']
                 ],
                 columns: [{
-                        data: 'ktp',
-                        name: 'ktp',
+                        data: 'berkas',
+                        name: 'berkas',
                         orderable: false,
                         searchable: false
                     },

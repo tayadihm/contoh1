@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Pengaduan;
 use App\Models\Tanggapan;
 use RealRashid\SweetAlert\Facades\Alert;
+use Yajra\DataTables\Facades\DataTables;
 
 class PengaduanController extends Controller
 {
@@ -14,15 +15,39 @@ class PengaduanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-
-        $items = Pengaduan::all();
-        return view('pages.admin.pengaduan.index',[
-            'items' => $items
-        ]);
-
-
+        if ($request->ajax()) {
+            $items = Pengaduan::all();
+            return DataTables::of($items)
+            ->addIndexColumn()
+            ->addColumn('berkas', function ($items){
+                $file_path = $items->berkas; // file_path adalah atribut pada model Pengaduan yang menyimpan path file PDF
+                $file_name = basename($file_path);
+                return '<a href="'. Storage::url($file_path) .'" target="_blank"><img src="/assets/img/pdf-svg.svg" class="img-fluid" width="45px"></i></a>';
+            })
+            ->addColumn('created_at', function ($date){
+                return Carbon::parse($date->created_at)->translatedFormat('d F Y - H:i:s');
+            })
+            ->addColumn('status', function ($item){
+                if ($item->status == 'Belum di Proses') {
+                    return '<span class="px-2 py-1 font-bold text-xs leading-tight text-red-700 bg-red-100 rounded-md dark:text-red-100 dark:bg-red-700">Belum di Proses</span>';
+                } elseif ($item->status == 'Sedang di Proses') {
+                    return '<span class="px-2 py-1 font-bold text-xs leading-tight text-orange-700 bg-orange-100 rounded-md dark:text-white dark:bg-orange-600">Sedang di Proses</span>';
+                } elseif ($item->status == 'Selesai') {
+                    return '<span class="px-2 py-1 font-bold text-xs leading-tight text-green-700 bg-green-100 rounded-md dark:bg-green-700 dark:text-green-100">Selesai</span>';
+                } else {
+                    return $item->status;
+                }
+            })
+            ->addColumn('action', function($row){
+                $actionBtn = '<a href="'.route('pengaduan.show', $row->id).'" class="btn btn-success btn-sm">Lihat</a>';
+                return $actionBtn;
+            })
+            ->rawColumns(['berkas', 'status', 'action'])
+            ->make(true);
+        }
+        return view('pages.admin.pengaduan.index');
     }
 
     /**
@@ -104,6 +129,6 @@ class PengaduanController extends Controller
         $pengaduan->delete();
 
         Alert::success('Berhasil', 'Pengaduan telah di hapus');
-        return redirect('admin/pengaduans');
+        return redirect('admin/pengaduan');
     }
 }

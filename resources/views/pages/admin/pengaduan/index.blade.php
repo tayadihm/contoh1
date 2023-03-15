@@ -22,19 +22,21 @@
                             </ul>
                         </div>
                     @endif
-                    <table class="w-full whitespace-no-wrap">
+                    <table class="w-full whitespace-no-wrap pengaduan-list">
                         <thead>
                             <tr
                                 class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
-                                <th class="px-4 py-3">Foto</th>
-                                <th class="px-4 py-3">Nama</th>
-                                <th class="px-4 py-3">Tanggal</th>
-                                <th class="px-4 py-3">Status</th>
-                                <th class="px-4 py-3">Aksi</th>
+                                <th class="px-6 py-2 text-xs dark:text-gray-300">Berkas</th>
+                                <th class="px-6 py-2 text-xs dark:text-gray-300">Nomor Rekening Nasabah</th>
+                                <th class="px-6 py-2 text-xs dark:text-gray-300">Nama Nasabah</th>
+                                <th class="px-6 py-2 text-xs dark:text-gray-300">Jenis Pengaduan</th>
+                                <th class="px-6 py-2 text-xs dark:text-gray-300">Tanggal</th>
+                                <th class="px-6 py-2 text-xs dark:text-gray-300">Status</th>
+                                <th class="px-6 py-2 text-xs dark:text-gray-300">Aksi</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-                            @forelse ($items as $item)
+                            {{-- @forelse ($items as $item)
                                 <tr class="text-gray-700 dark:text-gray-400 ">
                                     <td class="px-4 py-3">
                                         <div class="flex items-center text-sm">
@@ -113,12 +115,59 @@
                                         Data Kosong
                                     </td>
                                 </tr>
-                            @endforelse
+                            @endforelse --}}
                         </tbody>
                     </table>
                 </div>
             </div>
-
         </div>
     </main>
 @endsection
+
+@push('after-script')
+    <script type="text/javascript">
+        $(function() {
+            var table = $('.pengaduan-list').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "{{ route('pengaduans.index') }}",
+                order: [
+                    [4, 'desc']
+                ],
+                columns: [{
+                        data: 'berkas',
+                        name: 'berkas',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: 'norek_nasabah',
+                        name: 'norek_nasabah'
+                    },
+                    {
+                        data: 'name',
+                        name: 'name'
+                    },
+                    {
+                        data: 'jenis_pengaduan',
+                        name: 'jenis_pengaduan'
+                    },
+                    {
+                        data: 'created_at',
+                        name: 'created_at'
+                    },
+                    {
+                        data: 'status',
+                        name: 'status'
+                    },
+                    {
+                        data: 'action',
+                        name: 'action',
+                        orderable: false,
+                        searchable: false
+                    },
+                ],
+            });
+        });
+    </script>
+@endpush

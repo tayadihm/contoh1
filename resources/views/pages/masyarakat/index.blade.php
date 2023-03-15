@@ -4,6 +4,7 @@
     Dashboard
 @endsection
 @section('content')
+
     <main class="h-full pb-16 overflow-y-auto">
         {{-- @foreach ($user as $li)
             <li>{{ $li->nik }}</li>
@@ -33,6 +34,11 @@
                             name="name" id="name" placeholder="Nama Lengkap" value="{{ old('name') }}" required>
                     </div>
                     <div class="form-group">
+                        <label for="id_nasabah" class="text-gray-700 dark:text-gray-400">NIK Nasabah</label>
+                        <input type="text" class="form-control dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700"
+                            name="id_nasabah" id="id_nasabah" placeholder="NIK Nasabah" value="{{ old('id_nasabah') }}" required>
+                    </div>
+                    <div class="form-group">
                         <label for="norek_nasabah" class="text-gray-700 dark:text-gray-400">Nomor Rekening Nasabah</label>
                         <input type="text" class="form-control dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700"
                             name="norek_nasabah" id="norek_nasabah" placeholder="Nomor Rekening"
@@ -45,11 +51,11 @@
                             value="{{ old('phone_nasabah') }}" required>
                     </div>
                     <div class="form-group">
-                        <label for="jenis_pengaduan" class="dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700">Jenis
+                        <label for="jenis_pengaduan" class="text-gray-700 dark:text-gray-400">Jenis
                             Pengaduan</label>
                         <select name="jenis_pengaduan" id="jenis_pengaduan"
                             class="form-control dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700" required>
-                            <option selected disabled class="dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700">
+                            <option selected disabled class="text-gray-700 dark:text-gray-400 dark:border-gray-600 dark:bg-gray-700">
                                 -Pilih Jenis Pengaduan-</option>
                             <option value="KJP" class="dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700">KJP
                             </option>
@@ -60,11 +66,13 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="ktp" class="text-gray-700 dark:text-gray-400">Upload File (PDF)</label>
+                        <label for="berkas" class="text-gray-700 dark:text-gray-400">Upload File (PDF)</label>
+                        <small id="berkasHelp" class="text-sm text-gray-600 alert alert-primary p-1 m-1">Mohon upload scan KTP dan KK dalam 1 file format PDF.</small>
                         <input type="file"
                             class="form-control-file dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700"
-                            name="ktp" value="{{ old('ktp') }}" accept="application/pdf">
+                            name="berkas" value="{{ old('berkas') }}" accept="application/pdf">
                     </div>
+
                     <div class="form-group">
                         <label for="description" class="text-gray-700 dark:text-gray-400">Deskripsi Pengaduan</label>
                         <textarea class="block w-full mt-1 border-2 dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-textarea"

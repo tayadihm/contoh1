@@ -33,11 +33,6 @@ Route::prefix('user')
         Route::resource('pengaduan', 'MasyarakatController');
         Route::get('pengaduan', 'MasyarakatController@lihat')->name('masyarakat-lihat');
         Route::get('/stream-pdf/{id}', 'MasyarakatController@streamPdf')->name('stream-pdf');
-
-        // Route::get('/pdf/{filename}', function($filename) {
-        //     $path = storage_path('app/public/' . $filename);
-        //     return response()->file($path);
-        // })->name('pdf');
 });
 
 

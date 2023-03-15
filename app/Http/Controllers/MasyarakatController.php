@@ -50,7 +50,7 @@ class MasyarakatController extends Controller
         $request->validate([
             'description'       => 'required',
             'phone_nasabah'     => 'required|max:13',
-            'ktp'               => 'required|mimetypes:application/pdf',
+            'berkas'            => 'required|mimetypes:application/pdf|max:2048',
             'jenis_pengaduan'   => 'required|in:KJP,KJMU,BPMS'
         ]);
 
@@ -60,8 +60,8 @@ class MasyarakatController extends Controller
         $data = $request->all();
         $data['user_nik']=$nik;
         $data['user_id']=$id;
-        $filename = time() . '_' . $request->file('ktp')->getClientOriginalName();
-        $data['ktp'] = $request->file('ktp')->storeAs('public', $filename);
+        $filename = time() . '_' . $request->file('berkas')->getClientOriginalName();
+        $data['berkas'] = $request->file('berkas')->storeAs('public', $filename);
 
         try {
             Pengaduan::create($data);
@@ -69,7 +69,7 @@ class MasyarakatController extends Controller
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Pengaduan Gagal');
         }
-        return redirect('user');
+        return redirect('pengaduan');
     }
 
     public function streamPdf($filename)
@@ -97,13 +97,13 @@ class MasyarakatController extends Controller
             $items = Pengaduan::where('user_nik', Auth::user()->nik)->get();
             return DataTables::of($items)
             ->addIndexColumn()
-            ->addColumn('ktp', function ($items){
-                $file_path = $items->ktp; // file_path adalah atribut pada model Pengaduan yang menyimpan path file PDF
+            ->addColumn('berkas', function ($items){
+                $file_path = $items->berkas; // file_path adalah atribut pada model Pengaduan yang menyimpan path file PDF
                 $file_name = basename($file_path);
                 return '<a href="'. Storage::url($file_path) .'" target="_blank"><img src="/assets/img/pdf-svg.svg" class="img-fluid" width="45px"></i></a>';
             })
             ->addColumn('created_at', function ($date){
-                return Carbon::parse($date->created_at)->format('l, d F Y - H:i:s');
+                return Carbon::parse($date->created_at)->translatedFormat('d F Y - H:i:s');
             })
             ->addColumn('status', function ($item){
                 if ($item->status == 'Belum di Proses') {
@@ -120,7 +120,7 @@ class MasyarakatController extends Controller
                 $actionBtn = '<a href="'.route('pengaduan.show', $row->id).'" class="btn btn-success btn-sm">Lihat</a>';
                 return $actionBtn;
             })
-            ->rawColumns(['ktp', 'status', 'action'])
+            ->rawColumns(['berkas', 'status', 'action'])
             ->make(true);
         }
         return view('pages.masyarakat.detail');
