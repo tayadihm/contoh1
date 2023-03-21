@@ -14,13 +14,13 @@
         </nav>
         <div class="flex justify-center flex-1">
             <a class="inline-flex items-center text-sm mr-5 font-semibold transition-colors duration-150 text-gray-700 dark:text-gray-200"
-                href="{{ route('masyarakat-lihat') }}">
+                href="{{ route('masyarakat-lihat') }}" aria-hidden="true">
 
                 <span class="ml-4">Dashboard</span>
             </a>
 
             <a class="inline-flex items-center text-sm mr-5 font-semibold transition-colors duration-150 text-gray-700 dark:text-gray-200 "
-                href="{{ route('pengaduan.create') }}">
+                href="{{ route('pengaduan.create') }}" aria-hidden="true">
 
                 <span class="ml-4">Pengaduan</span>
             </a>

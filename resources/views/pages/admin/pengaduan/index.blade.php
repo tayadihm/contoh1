@@ -14,7 +14,7 @@
             <div class="w-full max-w-full">
                 <div
                     class="relative flex flex-col min-w-0 break-words bg-white border-0 shadow-soft-xl rounded-lg bg-clip-border">
-                    <div class="table-responsive shadow-soft-xl dark:bg-gray-700 dark:text-gray-300 py-4 px-4">
+                    <div class="table-responsive shadow-md dark:bg-gray-700 dark:text-gray-300 py-4 px-4">
                         @if ($errors->any())
                             <div class="alert alert-danger">
                                 <ul>

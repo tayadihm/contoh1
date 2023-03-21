@@ -36,7 +36,8 @@
                     <div class="form-group">
                         <label for="id_nasabah" class="text-gray-700 dark:text-gray-400">NIK Nasabah</label>
                         <input type="text" class="form-control dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700"
-                            name="id_nasabah" id="id_nasabah" placeholder="NIK Nasabah" value="{{ old('id_nasabah') }}" required>
+                            name="id_nasabah" id="id_nasabah" placeholder="NIK Nasabah" value="{{ old('id_nasabah') }}"
+                            required>
                     </div>
                     <div class="form-group">
                         <label for="norek_nasabah" class="text-gray-700 dark:text-gray-400">Nomor Rekening Nasabah</label>
@@ -55,7 +56,8 @@
                             Pengaduan</label>
                         <select name="jenis_pengaduan" id="jenis_pengaduan"
                             class="form-control dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700" required>
-                            <option selected disabled class="text-gray-700 dark:text-gray-400 dark:border-gray-600 dark:bg-gray-700">
+                            <option selected disabled
+                                class="text-gray-700 dark:text-gray-400 dark:border-gray-600 dark:bg-gray-700">
                                 -Pilih Jenis Pengaduan-</option>
                             <option value="KJP" class="dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700">KJP
                             </option>
@@ -67,7 +69,8 @@
                     </div>
                     <div class="form-group">
                         <label for="berkas" class="text-gray-700 dark:text-gray-400">Upload File (PDF)</label>
-                        <small id="berkasHelp" class="text-sm text-gray-600 alert alert-primary p-1 m-1">Mohon upload scan KTP dan KK dalam 1 file format PDF.</small>
+                        <small id="berkasHelp" class="text-sm text-gray-600 alert alert-primary p-1 m-1">Mohon upload scan
+                            KTP dan KK dalam 1 file format PDF.</small>
                         <input type="file"
                             class="form-control-file dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700"
                             name="berkas" value="{{ old('berkas') }}" accept="application/pdf">

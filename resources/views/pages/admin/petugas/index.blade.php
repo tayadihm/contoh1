@@ -13,7 +13,7 @@
 
             <div class="my-4 mb-6">
                 <a href="{{ route('petugas.create') }} "
-                    class="px-5 py-3  font-medium leading-5 text-white transition-colors duration-150 bg-red-600 border border-transparent rounded-lg active:bg-red-600 hover:bg-red-700 focus:outline-none focus:shadow-outline-red">
+                    class="px-5 py-3 font-medium leading-5 text-white transition-colors duration-150 bg-red-600 rounded-lg active:bg-red-600 hover:bg-red-700 focus:outline-none focus:shadow-outline-red">
                     Tambah Petugas
                 </a>
             </div>
@@ -33,13 +33,14 @@
                             <tr
                                 class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                                 <th class="px-4 py-3">Nama</th>
-                                <th class="px-4 py-3">NIK</th>
+                                <th class="px-4 py-3">No. Karyawan</th>
                                 <th class="px-4 py-3">No. Hp</th>
                                 <th class="px-4 py-3">Email</th>
-                                <th class="px-4 py-3">Role</th>
+                                <th class="px-4 py-3">Kantor Cabang</th>
+                                <th class="px-4 py-3">Aksi</th>
                             </tr>
                         </thead>
-                        <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+                        <tbody class="divide-y dark:divide-gray-700 dark:bg-gray-800">
                             @forelse ($data as $petugas)
                                 <tr class="text-gray-700 dark:text-gray-400">
                                     <td class="px-4 py-3 text-sm">
@@ -55,7 +56,10 @@
                                         {{ $petugas->email }}
                                     </td>
                                     <td class="px-4 py-3 text-sm">
-                                        {{ $petugas->roles }}
+                                        {{ $petugas->cabang }}
+                                    </td>
+                                    <td class="px-4 py-3 text-sm">
+                                        Aksi
                                     </td>
                                 </tr>
                             @empty

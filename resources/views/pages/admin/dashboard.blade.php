@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <main class="h-full overflow-y-auto">
+    <main class="h-full overflow-y-auto bg-gray-400">
         <div class="container px-6 mx-auto grid">
             <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
                 Dashboard
@@ -89,7 +89,7 @@
             @if (Auth::user()->roles == 'ADMIN')
                 <div class="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
                     <!-- Card -->
-                    <div class="flex items-center p-4 rounded-lg shadow-sm dark:bg-gray-800">
+                    {{-- <div class="flex items-center p-4 rounded-lg shadow-sm dark:bg-gray-800">
                         <div
                             class="p-3 mr-4 text-green-500 bg-green-100 rounded-full dark:text-green-100 dark:bg-green-500">
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -106,7 +106,7 @@
                                 {{ $user }}
                             </p>
                         </div>
-                    </div>
+                    </div> --}}
                     <!-- Card -->
                     <div class="flex items-center p-4 rounded-lg shadow-sm dark:bg-gray-800">
                         <div
@@ -118,7 +118,7 @@
                         </div>
                         <div>
                             <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                                Jumlah Petugas
+                                Jumlah ALN / CS
                             </p>
                             <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
                                 {{ $petugas }}
@@ -127,8 +127,7 @@
                     </div>
                     <!-- Card -->
                     <div class="flex items-center p-4 rounded-lg shadow-sm dark:bg-gray-800">
-                        <div
-                            class="p-3 mr-4 text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700">
+                        <div class="p-3 mr-4 text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700">
                             <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
                                     clip-rule="evenodd" />
@@ -136,7 +135,7 @@
                         </div>
                         <div>
                             <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                                Jumlah Admin
+                                Jumlah PIC HBL
                             </p>
                             <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
                                 {{ $admin }}

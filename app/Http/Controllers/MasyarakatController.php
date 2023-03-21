@@ -65,11 +65,10 @@ class MasyarakatController extends Controller
 
         try {
             Pengaduan::create($data);
-            return redirect()->back()->with('success', 'Pengaduan Berhasil');
+            return redirect()->route('masyarakat-dashboard')->with('success', 'Pengaduan Berhasil');
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Pengaduan Gagal');
+            return redirect()->back()->withInput()->with('error', 'Pengaduan Gagal');
         }
-        return redirect('pengaduan');
     }
 
     public function streamPdf($filename)

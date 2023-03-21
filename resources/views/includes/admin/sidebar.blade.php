@@ -4,7 +4,7 @@
         <img src="{{ asset('img/logo.svg') }}" alt=""
             class="inline-flex ml-3 items-center transform transition hover:scale-125 duration-300 ease-in-out" />
         <a class="ml-3 text-lg font-bold text-gray-800 dark:text-gray-200" href="/">
-            APLIKASIKU
+            I-REACH
         </a>
         <ul class="mt-6">
             <li class="relative px-6 py-2">
@@ -24,7 +24,7 @@
         <ul>
             <li class="relative px-6 py-2">
                 <span
-                    class="{{ request()->routeIs('pengaduans.index') ? 'absolute inset-y-0 left-0 w-1 bg-red-600 rounded-tr-lg rounded-br-lg' : '' }} "
+                    class="{{ request()->routeIs('pengaduans.index') || request()->routeIs('pengaduans.show') || request()->routeIs('tanggapan.show') ? 'absolute inset-y-0 left-0 w-1 bg-red-600 rounded-tr-lg rounded-br-lg' : '' }} "
                     aria-hidden="true"></span>
                 <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 text-gray-600 hover:text-gray-800 dark:text-gray-200 dark:hover:text-gray-700"
                     href="{{ route('pengaduans.index') }}">
@@ -37,27 +37,11 @@
                 </a>
             </li>
         </ul>
-        <ul>
-            <li class="relative px-6 py-2">
-                <span
-                    class="{{ request()->is('admin/masyarakat') ? 'absolute inset-y-0 left-0 w-1 bg-red-600 rounded-tr-lg rounded-br-lg' : '' }} "
-                    aria-hidden="true"></span>
-                <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 text-gray-600 hover:text-gray-800 dark:text-gray-200 dark:hover:text-gray-700"
-                    href="{{ url('admin/masyarakat') }}">
-                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                        <path
-                            d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z">
-                        </path>
-                    </svg>
-                    <span class="ml-4">Masyarakat</span>
-                </a>
-            </li>
-        </ul>
         @if (Auth::user()->roles == 'ADMIN')
             <ul>
                 <li class="relative px-6 py-2">
                     <span
-                        class="{{ request()->is('admin/petugas') ? 'absolute inset-y-0 left-0 w-1 bg-red-600 rounded-tr-lg rounded-br-lg' : '' }} "
+                        class="{{ request()->is('admin/petugas') || request()->is('admin/petugas/create')  ? 'absolute inset-y-0 left-0 w-1 bg-red-600 rounded-tr-lg rounded-br-lg' : '' }} "
                         aria-hidden="true"></span>
                     <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 text-gray-600 hover:text-gray-800 dark:text-gray-200 dark:hover:text-gray-700"
                         href="{{ route('petugas.index') }}">
@@ -104,7 +88,7 @@
     @keydown.escape="closeSideMenu">
     <div class="py-4 text-gray-500 dark:text-gray-400">
         <a class="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200" href="#">
-            APLIKASIKU
+            I-REACH
         </a>
         <ul class="mt-6">
             <li class="relative px-6 py-3">

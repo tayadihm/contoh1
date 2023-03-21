@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-
 use RealRashid\SweetAlert\Facades\Alert;
 
 
@@ -27,7 +26,7 @@ class PetugasController extends Controller
             return back();
         }
 
-        $data = DB::table('users')->where('roles', '=', 'PETUGAS')->orWhere('roles', '=', 'ADMIN')->get();
+        $data = DB::table('users')->where('roles', '=', 'USER')->get();
         return view('pages.admin.petugas.index', [
             'data' => $data
         ]);
@@ -51,11 +50,12 @@ class PetugasController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $this->validate($request, [
             'nik' => 'required|string|max:16|unique:users',
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'phone' => 'required|string|max:15',
+            'cabang' => 'required|string',
             'password' => 'required|string|confirmed|min:8',
         ]);
 
@@ -66,12 +66,27 @@ class PetugasController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
-            'roles' => $request->roles,
+            'cabang' => $request->cabang,
             'password' => Hash::make($request->password),
         ]);
 
-        Alert::success('Berhasil', 'Petugas baru ditambahkan');
-        return redirect('admin/petugas');
+        if ($user) {
+            return redirect()
+            ->route('petugas.index')
+            ->with([
+                'success' => 'Petugas baru ditambahkan'
+            ]);
+        } else {
+            return redirect()
+            ->back()
+            ->withInput()
+            ->with([
+                'error' => 'Petugas gagal ditambahkan'
+            ]);
+        }
+
+        // Alert::success('Berhasil', 'Petugas baru ditambahkan');
+        // return redirect('admin/petugas');
     }
 
     /**

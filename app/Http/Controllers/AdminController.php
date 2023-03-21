@@ -6,8 +6,7 @@ use Illuminate\Support\Facades\DB;
 
 use App\Models\Pengaduan;
 
-// use Barryvdh\DomPDF\PDF;
-use Barryvdh\DomPDF\Facade as PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 
 class AdminController extends Controller
@@ -50,9 +49,9 @@ class AdminController extends Controller
 
         $pengaduan = Pengaduan::all();
 
-        $pdf = PDF::loadview('pages.admin.pengaduan',[
+        $pdf = Pdf::loadview('pages.admin.pengaduan',[
             'pengaduan' => $pengaduan
-        ]);
+        ])->setPaper('a4', 'landscape');
         return $pdf->download('laporan.pdf');
     }
 
@@ -60,7 +59,7 @@ class AdminController extends Controller
 
         $pengaduan = Pengaduan::find($id);
 
-        $pdf = PDF::loadview('pages.admin.pengaduan.cetak', compact('pengaduan'))->setPaper('a4');
+        $pdf = Pdf::loadview('pages.admin.pengaduan.cetak', compact('pengaduan'))->setPaper('a4');
         return $pdf->download('laporan-pengaduan.pdf');
     }
 }

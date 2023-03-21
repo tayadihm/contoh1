@@ -13,7 +13,7 @@ class DashboardController extends Controller
         return view('pages.admin.dashboard',[
             'pengaduan' => Pengaduan::count(),
             'user' => User::where('roles','=', 'USER')->count(),
-            'petugas' => User::where('roles', '=', 'PETUGAS')->count(),
+            'petugas' => User::where('roles', '=', 'USER')->count(),
             'admin' => User::where('roles', '=', 'ADMIN')->count(),
             'tanggapan' => Tanggapan::count(),
             'pending' => Pengaduan::where('status', 'Belum di Proses')->count(),
