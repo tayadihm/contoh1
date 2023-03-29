@@ -12,7 +12,7 @@ class Tanggapan extends Model
     protected $table = 'tanggapan';
 
     protected $fillable = [
-        'id', 'pengaduan_id', 'tanggapan', 'feedback', 'user_id'
+        'id', 'pengaduan_id', 'tanggapan', 'feedback'
     ];
 
     protected $hidden = [

@@ -18,19 +18,22 @@
                         <span class="text-gray-700 dark:text-gray-400">Tanggapan</span>
                         <textarea
                             class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-textarea focus:border-red-400 focus:outline-none focus:shadow-outline-red dark:focus:shadow-outline-gray"
-                            rows="8" type="text" placeholder="Isi Tanggapan Anda" value="{{ old('description') }}" name="tanggapan"></textarea>
+                            rows="8" type="text" placeholder="Isi Tanggapan Anda" name="tanggapan"></textarea>
+                    </label>
+
+                    <label class="block mt-4 text-sm">
+                        <span class="text-gray-700 dark:text-gray-400 ">Lampiran</span>
+                        <input type="file" class="form-control-file mt-1 dark:text-gray-400" name="feedback" accept="application/pdf">
                     </label>
 
                     <label class="block mt-4 text-sm">
                         <span class="text-gray-700 dark:text-gray-400">Status</span>
-
                         <select
-                            class="block w-full text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-red-400 focus:outline-none focus:shadow-outline-red dark:focus:shadow-outline-gray"
+                            class="w-full text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-red-400 focus:outline-none focus:shadow-outline-red dark:focus:shadow-outline-gray"
                             name="status">
                             <option value="Belum di Proses">Belum di Proses</option>
                             <option value="Sedang di Proses">Sedang di Proses</option>
                             <option value="Selesai">Selesai</option>
-
                         </select>
                     </label>
 

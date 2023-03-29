@@ -106,11 +106,11 @@ class MasyarakatController extends Controller
             })
             ->addColumn('status', function ($item){
                 if ($item->status == 'Belum di Proses') {
-                    return '<span class="px-2 py-1 font-bold text-xs leading-tight text-red-700 bg-red-100 rounded-md dark:text-red-100 dark:bg-red-700">Belum di Proses</span>';
+                    return '<span class="px-2 py-1 font-medium text-xs leading-tight text-red-700 bg-red-100 rounded-md dark:text-red-100 dark:bg-red-700">Belum di Proses</span>';
                 } elseif ($item->status == 'Sedang di Proses') {
-                    return '<span class="px-2 py-1 font-bold text-xs leading-tight text-orange-700 bg-orange-100 rounded-md dark:text-white dark:bg-orange-600">Sedang di Proses</span>';
+                    return '<span class="px-2 py-1 font-medium text-xs leading-tight text-blue-500 bg-blue-100 rounded-md dark:text-white dark:bg-blue-500">Sedang di Proses</span>';
                 } elseif ($item->status == 'Selesai') {
-                    return '<span class="px-2 py-1 font-bold text-xs leading-tight text-green-700 bg-green-100 rounded-md dark:bg-green-700 dark:text-green-100">Selesai</span>';
+                    return '<span class="px-2 py-1 font-medium text-xs leading-tight text-green-700 bg-green-100 rounded-md dark:bg-green-700 dark:text-green-100">Selesai</span>';
                 } else {
                     return $item->status;
                 }

@@ -106,7 +106,7 @@
                                                 </span>
                                             @elseif ($item->status == 'Sedang di Proses')
                                                 <span
-                                                    class="px-2 py-1 font-semibold leading-tight text-orange-700 bg-orange-100 rounded-md dark:text-white dark:bg-orange-600">
+                                                    class="px-2 py-1 font-semibold leading-tight text-blue-500 bg-blue-100 rounded-md dark:text-white dark:bg-blue-500">
                                                     {{ $item->status }}
                                                 </span>
                                             @else
