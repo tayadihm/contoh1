@@ -54,13 +54,15 @@ class MasyarakatController extends Controller
             'jenis_pengaduan'   => 'required|in:KJP,KJMU,BPMS'
         ]);
 
+        $now = Carbon::now('Asia/Jakarta');
+
         $nik = Auth::user()->nik;
         $id = Auth::user()->id;
 
         $data = $request->all();
         $data['user_nik']=$nik;
         $data['user_id']=$id;
-        $filename = time() . '_' . $request->file('berkas')->getClientOriginalName();
+        $filename = $now->timestamp . '_' . $request->file('berkas')->getClientOriginalName();
         $data['berkas'] = $request->file('berkas')->storeAs('public', $filename);
 
         try {

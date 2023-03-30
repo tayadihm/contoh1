@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use RealRashid\SweetAlert\Facades\Alert;
-
+use Yajra\DataTables\Facades\DataTables;
 
 class PetugasController extends Controller
 {
@@ -18,18 +18,27 @@ class PetugasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        if (Auth::user()->roles != 'ADMIN') {
+        // if (Auth::user()->roles != 'ADMIN') {
 
-            Alert::warning('Peringatan', 'Maaf Anda tidak punya akses');
-            return back();
+        //     Alert::warning('Peringatan', 'Maaf Anda tidak punya akses');
+        //     return back();
+        // }
+
+        if ($request->ajax()) {
+            $data = DB::table('users')->where('roles', '=', 'USER')->get();
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $editBtn = '<a href="' . route('petugas.edit', $row->id) . '" class="btn btn-primary btn-sm">Ubah</a>';
+                    $deleteBtn = '<a href="' . route('petugas.destroy', $row->id) . '" class="btn btn-danger btn-sm">Hapus</a>';
+                    return $editBtn . ' ' . $deleteBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
         }
-
-        $data = DB::table('users')->where('roles', '=', 'USER')->get();
-        return view('pages.admin.petugas.index', [
-            'data' => $data
-        ]);
+        return view('pages.admin.petugas.index');
     }
 
     /**
@@ -72,17 +81,17 @@ class PetugasController extends Controller
 
         if ($user) {
             return redirect()
-            ->route('petugas.index')
-            ->with([
-                'success' => 'Petugas baru ditambahkan'
-            ]);
+                ->route('petugas.index')
+                ->with([
+                    'success' => 'Petugas baru ditambahkan'
+                ]);
         } else {
             return redirect()
-            ->back()
-            ->withInput()
-            ->with([
-                'error' => 'Petugas gagal ditambahkan'
-            ]);
+                ->back()
+                ->withInput()
+                ->with([
+                    'error' => 'Petugas gagal ditambahkan'
+                ]);
         }
 
         // Alert::success('Berhasil', 'Petugas baru ditambahkan');

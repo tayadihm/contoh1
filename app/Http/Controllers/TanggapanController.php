@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-
-
+use Carbon\Carbon;
+use App\Models\User;
 use App\Models\Pengaduan;
 use App\Models\Tanggapan;
-use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
 
 
@@ -43,20 +44,31 @@ class TanggapanController extends Controller
      */
     public function store(Request $request)
     {
-        DB::table('pengaduan')->where('id', $request->pengaduan_id)->update([
-            'status'=> $request->status,
+        $request->validate([
+            'tanggapan'     => 'required|max:255',
+            'status'        => 'required|in:Selesai,Sedang di Proses,Belum di Proses',
+            'feedback'      => 'required|max:2048|mimetypes:application/pdf'
         ]);
 
+        $now = Carbon::now('Asia/Jakarta');
+
         $petugas_id = Auth::user()->id;
-
         $data = $request->all();
-
         $data['pengaduan_id'] = $request->pengaduan_id;
         $data['petugas_id']=$petugas_id;
+        $filename = $now->format('Ymd_His') . '_' . $request->file('feedback')->getClientOriginalName();
+        $data['feedback'] = $request->file('feedback')->storeAs('public', $filename);
 
-        Alert::success('Berhasil', 'Pengaduan berhasil ditanggapi');
-        Tanggapan::create($data);
-        return redirect('admin/pengaduans');
+        try {
+            Tanggapan::create($data);
+            DB::table('pengaduan')->where('id', $request->pengaduan_id)->update([
+                'status'=> $request->status,
+            ]);
+            return redirect()->route('pengaduans.show', ['pengaduan' => $request->pengaduan_id])->with('success', 'Pengaduan Berhasil Ditanggapi');
+        } catch (\Exception $e) {
+            Log::error($e);
+            return redirect()->back()->withInput()->with('error', 'Tanggapan Gagal:' . $e->getMessage());
+        }
     }
 
     /**
@@ -84,7 +96,8 @@ class TanggapanController extends Controller
      */
     public function edit($id)
     {
-        //
+        $tanggapan = Tanggapan::findOrFail($id);
+        return view('pages.admin.tanggapan.edit', compact('tanggapan'));
     }
 
     /**
@@ -96,6 +109,33 @@ class TanggapanController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'tanggapan'     => 'required|max:255',
+            'status'        => 'required|in:Selesai,Sedang di Proses,Belum di Proses',
+            'feedback'      => 'nullable|max:2048|mimetypes:application/pdf'
+        ]);
+
+        $now = Carbon::now('Asia/Jakarta');
+        $tanggapan = Tanggapan::findOrFail($id);
+        $petugas_id = Auth::user()->id;
+        $data = $request->all();
+        $data['petugas_id'] = $petugas_id;
+
+        if ($request->hasFile('feedback')) {
+            $filename = $now->format('Ymd_His') . '_' . $request->file('feedback')->getClientOriginalName();
+            $data['feedback'] = $request->file( 'feedback')->storeAs('public', $filename);
+        }
+
+        try {
+            $tanggapan->update($data);
+            DB::table('pengaduan')->where('id', $tanggapan->pengaduan_id)->update([
+                'status'=> $request->status,
+            ]);
+            return redirect()->route('pengaduans.show', ['pengaduan' => $tanggapan->pengaduan_id])->with('success', 'Tanggapan Berhasil Diupdate');
+        } catch (\Exception $e) {
+            Log::error($e);
+            return redirect()->back()->withInput()->with('error', 'Tanggapan Gagal:' . $e->getMessage());
+        }
 
     }
 

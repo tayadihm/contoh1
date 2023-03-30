@@ -17,63 +17,78 @@
                     Tambah Petugas
                 </a>
             </div>
-            <div class="w-full mb-8 overflow-hidden rounded-lg shadow-xs">
-                <div class="w-full overflow-x-auto">
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }} </li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-                    <table class="w-full whitespace-no-wrap">
-                        <thead>
-                            <tr
-                                class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
-                                <th class="px-4 py-3">Nama</th>
-                                <th class="px-4 py-3">No. Karyawan</th>
-                                <th class="px-4 py-3">No. Hp</th>
-                                <th class="px-4 py-3">Email</th>
-                                <th class="px-4 py-3">Kantor Cabang</th>
-                                <th class="px-4 py-3">Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y dark:divide-gray-700 dark:bg-gray-800">
-                            @forelse ($data as $petugas)
-                                <tr class="text-gray-700 dark:text-gray-400">
-                                    <td class="px-4 py-3 text-sm">
-                                        {{ $petugas->name }}
-                                    </td>
-                                    <td class="px-4 py-3 text-sm">
-                                        {{ $petugas->nik }}
-                                    </td>
-                                    <td class="px-4 py-3 text-sm">
-                                        {{ $petugas->phone }}
-                                    </td>
-                                    <td class="px-4 py-3 text-sm">
-                                        {{ $petugas->email }}
-                                    </td>
-                                    <td class="px-4 py-3 text-sm">
-                                        {{ $petugas->cabang }}
-                                    </td>
-                                    <td class="px-4 py-3 text-sm">
-                                        Aksi
-                                    </td>
+            <div class="w-full mb-8 overflow-hidden rounded-lg shadow-md">
+                <div
+                    class="relative flex flex-col min-w-0 break-words bg-white border-0 shadow-soft-xl rounded-lg bg-clip-border">
+                    <div class="table-responsive shadow-md dark:bg-gray-700 dark:text-gray-300 py-4 px-4">
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }} </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        <table
+                            class="table table-borderless w-full whitespace-normal text-slate-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-400 table-aln">
+                            <thead>
+                                <tr
+                                    class="text-sm font-semibold tracking-wide text-left text-gray-500 border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                                    <th class="px-6 py-2 dark:text-gray-300">Nama</th>
+                                    <th class="px-6 py-2 dark:text-gray-300">No. Karyawan</th>
+                                    <th class="px-6 py-2 dark:text-gray-300">No. Hp</th>
+                                    <th class="px-6 py-2 dark:text-gray-300">Email</th>
+                                    <th class="px-6 py-2 dark:text-gray-300">Kantor Cabang</th>
+                                    <th class="px-6 py-2 dark:text-gray-300">Aksi</th>
                                 </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="7" class="text-center text-gray-400">
-                                        Data Kosong
-                                    </td>
-                                </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+                            </thead>
+                            <tbody class="dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 text-sm">
 
-        </div>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
     </main>
 @endsection
+
+@push('after-script')
+    <script type="text/javascript">
+        $(function() {
+            var table = $('.table-aln').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "{{ route('petugas.index') }}",
+                columns: [{
+                        data: 'name',
+                        name: 'name'
+                    },
+                    {
+                        data: 'nik',
+                        name: 'nik'
+                    },
+                    {
+                        data: 'phone',
+                        name: 'phone'
+                    },
+                    {
+                        data: 'email',
+                        name: 'email'
+                    },
+                    {
+                        data: 'cabang',
+                        name: 'cabang'
+                    },
+                    {
+                        data: 'action',
+                        name: 'action',
+                        orderable: false,
+                        searchable: false
+                    },
+                ],
+            });
+        });
+    </script>
+@endpush

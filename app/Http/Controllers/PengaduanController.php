@@ -43,8 +43,9 @@ class PengaduanController extends Controller
                 }
             })
             ->addColumn('action', function($row){
-                $actionBtn = '<a href="'.route('pengaduans.show', $row->id).'" class="btn btn-success btn-sm">Lihat</a>';
-                return $actionBtn;
+                $lihatBtn = '<a href="'.route('pengaduans.show', $row->id).'" class="btn btn-success btn-sm">Lihat</a>';
+                $updateBtn = '<a href="'.route('pengaduans.edit', $row->id).'" class="btn btn-info btn-sm">Update</a>';
+                return $lihatBtn . ' ' . $updateBtn;
             })
             ->rawColumns(['berkas', 'status', 'action'])
             ->make(true);
@@ -82,10 +83,12 @@ class PengaduanController extends Controller
     public function show($id)
     {
         $item = Pengaduan::with([
-            'details', 'user'
+            'details', 'user', 'tanggapan'
         ])->findOrFail($id);
 
         $tangap = Tanggapan::where('pengaduan_id',$id)->first();
+
+        // return dd($tangap);
 
         return view('pages.admin.pengaduan.detail',[
             'item' => $item,
@@ -101,7 +104,16 @@ class PengaduanController extends Controller
      */
     public function edit($id)
     {
-       //
+        $item = Pengaduan::with([
+            'details', 'user'
+        ])->findOrFail($id);
+
+        $tanggapan = Tanggapan::where('pengaduan_id',$id)->first();
+
+        return view('pages.admin.tanggapan.edit',[
+            'item' => $item,
+            'tanggapan' => $tanggapan
+        ]);
     }
 
     /**
