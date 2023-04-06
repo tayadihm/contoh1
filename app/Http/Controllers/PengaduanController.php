@@ -44,7 +44,7 @@ class PengaduanController extends Controller
             })
             ->addColumn('action', function($row){
                 $lihatBtn = '<a href="'.route('pengaduans.show', $row->id).'" class="btn btn-success btn-sm">Lihat</a>';
-                $updateBtn = '<a href="'.route('pengaduans.edit', $row->id).'" class="btn btn-info btn-sm">Update</a>';
+                $updateBtn = '<a href="'.route('pengaduans.edit', $row->id).'" class="btn btn-warning btn-sm">Update</a>';
                 return $lihatBtn . ' ' . $updateBtn;
             })
             ->rawColumns(['berkas', 'status', 'action'])

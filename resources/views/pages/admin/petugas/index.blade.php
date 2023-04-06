@@ -89,6 +89,22 @@
                     },
                 ],
             });
+            $(document).on('click', '.btn-delete', function(e) {
+                e.preventDefault();
+                console.log('Button delete clicked');
+                var id = $(this).data('id'); // definisikan variabel id
+                swal({
+                    title: "Apakah Anda yakin?",
+                    text: "Data yang dihapus tidak dapat dikembalikan!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                }).then((willDelete) => {
+                    if (willDelete) {
+                        $('form.form-delete[data-id="' + id + '"]').submit();
+                    }
+                });
+            });
         });
     </script>
 @endpush

@@ -79,7 +79,6 @@
                     {{ __('Register') }}
                 </x-button>
 
-
             </div>
         </form>
     </x-auth-card>

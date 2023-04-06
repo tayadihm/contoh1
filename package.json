@@ -26,6 +26,7 @@
         "autoprefixer": "^9.8.6",
         "bootstrap-icons": "^1.10.3",
         "postcss-import": "^14.0.0",
+        "sweetalert": "^2.1.2",
         "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.2"
     }
 }

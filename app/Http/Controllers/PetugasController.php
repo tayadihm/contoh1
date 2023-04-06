@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Petugas;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -32,13 +33,15 @@ class PetugasController extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
                     $editBtn = '<a href="' . route('petugas.edit', $row->id) . '" class="btn btn-primary btn-sm">Ubah</a>';
-                    $deleteBtn = '<a href="' . route('petugas.destroy', $row->id) . '" class="btn btn-danger btn-sm">Hapus</a>';
-                    return $editBtn . ' ' . $deleteBtn;
+                    $deleteBtn = '<button class="btn btn-danger btn-sm btn-delete" data-id="' . $row->id . '">Hapus</button>';
+                    $deleteForm = '<form action="' . route('petugas.destroy', $row->id) . '" method="POST" class="d-none form-delete" data-id="' . $row->id . '">
+                                    ' . method_field('DELETE') . csrf_field() . '</form>';
+                    return $editBtn . ' ' . $deleteBtn . ' ' . $deleteForm;
                 })
                 ->rawColumns(['action'])
                 ->make(true);
         }
-        return view('pages.admin.petugas.index');
+        return response()->view('pages.admin.petugas.index');
     }
 
     /**
@@ -48,7 +51,7 @@ class PetugasController extends Controller
      */
     public function create()
     {
-        return view('pages.admin.petugas.create');
+        return response()->view('pages.admin.petugas.create');
     }
 
     /**
@@ -80,13 +83,15 @@ class PetugasController extends Controller
         ]);
 
         if ($user) {
-            return redirect()
+            return response()
+                ->redirect()
                 ->route('petugas.index')
                 ->with([
                     'success' => 'Petugas baru ditambahkan'
                 ]);
         } else {
-            return redirect()
+            return response()
+                ->redirect()
                 ->back()
                 ->withInput()
                 ->with([
@@ -117,7 +122,10 @@ class PetugasController extends Controller
      */
     public function edit($id)
     {
-        //
+        $petugas = User::findOrFail($id);
+        return response()->view('pages.admin.petugas.edit', [
+            'petugas' => $petugas
+        ]);
     }
 
     /**
@@ -129,7 +137,40 @@ class PetugasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'nik' => 'required|string|max:16|unique:users,nik,' . $id,
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $id,
+            'phone' => 'required|string|max:15',
+            'cabang' => 'required|string',
+            'password' => 'required|string|confirmed|min:8',
+        ]);
+
+        $petugas = User::findOrFail($id);
+
+        $petugas->nik = $request->nik;
+        $petugas->name = $request->name;
+        $petugas->email = $request->email;
+        $petugas->phone = $request->phone;
+        $petugas->cabang = $request->cabang;
+        if ($request->filled('password')) {
+            $petugas->password = Hash::make($request->password);
+        }
+
+        if ($petugas->update()) {
+            return redirect()
+                ->route('petugas.index')
+                ->with([
+                    'success' => 'Petugas berhasil diupdate'
+                ]);
+        } else {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with([
+                    'error' => 'Petugas gagal diupdate'
+                ]);
+        }
     }
 
     /**
@@ -140,6 +181,21 @@ class PetugasController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $petugas = User::findOrFail($id);
+
+        if ($petugas->delete()) {
+            return redirect()
+                ->route('petugas.index')
+                ->with([
+                    'success' => 'Petugas ' .$petugas->name. ' berhasil dihapus'
+                ]);
+        } else {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with([
+                    'error' => 'Petugas ' .$petugas->name. ' gagal dihapus'
+                ]);
+        }
     }
 }

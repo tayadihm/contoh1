@@ -13,10 +13,16 @@
                     @foreach ($item->details as $ite)
                         <div class="row">
                             <div class="col-md-3">
-                                <h3 class="my-3 font-semibold mx-3 dark:text-gray-300">Berkas</h3>
-                                <img src="/assets/img/pdf-svg.svg" class="img-fluid mb-2 w-auto" loading="lazy" alt="Berkas">
-                                <a href="{{ Storage::url($item->berkas) }}" target="_blank"
-                                    class="btn btn-primary btn-sm w-full">Download</a>
+                                @if (empty($tangap->feedback))
+                                    <div class="mx-3 mt-4 px-2 alert alert-danger text-center text-xs font-bold">Belum ada
+                                        feedback dari HBL</div>
+                                @else
+                                    <h3 class="my-3 font-semibold mx-3 dark:text-gray-300">Berkas</h3>
+                                    <img src="/assets/img/pdf-svg.svg" class="img-fluid mb-2 w-auto" loading="lazy"
+                                        alt="Berkas">
+                                    <a href="{{ Storage::url($tangap->feedback) }}" target="_blank"
+                                        class="btn btn-primary btn-sm w-full">Download</a>
+                                @endif
                             </div>
                             <div class="col-md-9">
                                 <h3 class="my-3 dark:text-gray-300">Detail Pengaduan</h3>
@@ -93,7 +99,8 @@
                                         <div class="col-sm-7">
                                             <input type="text"
                                                 class="form-input col-sm-9 dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700"
-                                                value="{{ $ite->created_at->translatedFormat('l, d F Y - H:i:s') }}" disabled>
+                                                value="{{ $ite->created_at->translatedFormat('l, d F Y - H:i:s') }}"
+                                                disabled>
                                         </div>
                                     </div>
                                     <div class="form-group row">
