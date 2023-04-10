@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>APLIKASI | Pengaduan Masyarakat</title>
+    <title>Website | Layanan Bansos</title>
 
     <style>
         .table {
@@ -23,7 +23,7 @@
 <body>
     <div class="mt-5 w-full">
         <div class="title text-center mb-5">
-            <h2>Laporan Layanan Pengaduan Online</h2>
+            <h2>Laporan Layanan Pengaduan Bansos</h2>
         </div>
         <table class="table table-bordered">
             <thead class="thead">

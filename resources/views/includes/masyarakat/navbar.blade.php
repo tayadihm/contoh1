@@ -12,19 +12,24 @@
 
         <nav>
         </nav>
-        <div class="flex justify-center flex-1">
-            <a class="inline-flex items-center text-sm mr-5 font-semibold transition-colors duration-150 text-gray-700 dark:text-gray-200"
-                href="{{ route('masyarakat-lihat') }}" aria-hidden="true">
+ 
+        <div class="flex items-center justify-start flex-1">
+        <img src="{{ asset('img/logo1.png') }}" alt="Logo" class="inline-flex ml-3 items-center transform transition hover:scale-125 duration-300 ease-in-out" style="max-width: 80px; max-height: 80px;" />
+            <a class="ml-1 text-2xl font-bold text-gray-800 dark:text-gray-200">
+            I-REACH
+            </a>
 
-                <span class="ml-4">Dashboard</span>
+            <a class="inline-flex items-center text-sm mr-5 ml-6 font-semibold transition-colors duration-150 text-gray-700 dark:text-gray-200"
+                href="{{ route('masyarakat-lihat') }}" aria-hidden="true">
+                <span class="ml-4" style="font-size: 16px;" >Dashboard</span>
             </a>
 
             <a class="inline-flex items-center text-sm mr-5 font-semibold transition-colors duration-150 text-gray-700 dark:text-gray-200 "
                 href="{{ route('pengaduan.create') }}" aria-hidden="true">
-
-                <span class="ml-4">Pengaduan</span>
+                <span class="ml-4" style="font-size: 16px;">Pengaduan</span>
             </a>
-            {{-- <div @click.away="open = false" class="relative" x-data="{ open: false }">
+
+        {{-- <div @click.away="open = false" class="relative" x-data="{ open: false }">
         <button @click="open = !open"
           class="inline-flex items-center  text-sm mr-5 font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100">
           <span>Pengaduan</span>
@@ -45,7 +50,8 @@
 
             <a class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-red-600 dark:text-gray-100"
               href="#">Link #1</a>
-
+            
+            </div>
           </div>
         </div>
       </div> --}}

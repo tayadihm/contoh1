@@ -1,9 +1,8 @@
 <!-- Desktop sidebar -->
 <aside class="z-20 hidden w-64 overflow-y-auto dark:bg-gray-800 md:block flex-shrink-0">
     <div class="py-4 text-gray-500 dark:text-gray-400">
-        <img src="{{ asset('img/logo.svg') }}" alt=""
-            class="inline-flex ml-3 items-center transform transition hover:scale-125 duration-300 ease-in-out" />
-        <a class="ml-3 text-lg font-bold text-gray-800 dark:text-gray-200" href="/">
+    <img src="{{ asset('img/logo1.png') }}" alt="Logo" class="inline-flex ml-3 items-center transform transition hover:scale-125 duration-300 ease-in-out" style="max-width: 80px; max-height: 80px;" />
+        <a class="ml-1 text-2xl font-bold text-gray-800 dark:text-gray-200" href="/">
             I-REACH
         </a>
         <ul class="mt-6">
