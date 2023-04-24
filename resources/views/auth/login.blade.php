@@ -17,11 +17,11 @@
 
             @csrf
 
-            <!-- Email Address -->
+            <!-- NIK -->
             <div>
-                <x-label for="email" :value="__('Email')" />
+                <x-label for="nik" :value="__('NIK')" />
 
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')"
+                <x-input id="nik" class="block mt-1 w-full" type="text" name="nik" :value="old('nik')"
                     required autofocus />
             </div>
 
