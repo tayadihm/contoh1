@@ -13,7 +13,9 @@
                     @foreach ($item->details as $ite)
                         <div class="row">
                             <div class="col-md-3">
-                                @if (empty($tangap->feedback))
+                                @if (is_null($tangap) || is_null($tangap->feedback))
+                                    <div class="mx-3 mt-4 px-2 alert alert-primary text-center text-xs font-bold">Di Proses</div>
+                                @elseif (empty($tangap->feedback))
                                     <div class="mx-3 mt-4 px-2 alert alert-danger text-center text-xs font-bold">Belum ada
                                         feedback dari HBL</div>
                                 @else

@@ -47,7 +47,7 @@ class TanggapanController extends Controller
         $request->validate([
             'tanggapan'     => 'required|max:255',
             'status'        => 'required|in:Selesai,Sedang di Proses,Belum di Proses',
-            'feedback'      => 'required|max:2048|mimetypes:application/pdf'
+            'feedback'      => 'nullable|max:2048|mimetypes:application/pdf'
         ]);
 
         $now = Carbon::now('Asia/Jakarta');
@@ -56,8 +56,11 @@ class TanggapanController extends Controller
         $data = $request->all();
         $data['pengaduan_id'] = $request->pengaduan_id;
         $data['petugas_id']=$petugas_id;
-        $filename = $now->format('Ymd_His') . '_' . $request->file('feedback')->getClientOriginalName();
-        $data['feedback'] = $request->file('feedback')->storeAs('public', $filename);
+
+        if ($request->hasFile('feedback')) {
+            $filename = $now->format('Ymd_His') . '_' . $request->file('feedback')->getClientOriginalName();
+            $data['feedback'] = $request->file('feedback')->storeAs('public', $filename);
+        }
 
         try {
             Tanggapan::create($data);

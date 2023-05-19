@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
 use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -28,7 +29,7 @@ class PetugasController extends Controller
         // }
 
         if ($request->ajax()) {
-            $data = DB::table('users')->where('roles', '=', 'USER')->get();
+            $data = DB::table('users')->where('roles', '=', 'ADMIN')->get();
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
@@ -68,6 +69,7 @@ class PetugasController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'phone' => 'required|string|max:15',
             'cabang' => 'required|string',
+            'roles' => 'required|in:ADMIN',
             'password' => 'required|string|confirmed|min:8',
         ]);
 
@@ -79,28 +81,22 @@ class PetugasController extends Controller
             'email' => $request->email,
             'phone' => $request->phone,
             'cabang' => $request->cabang,
+            'roles' => $request->roles,
             'password' => Hash::make($request->password),
         ]);
 
         if ($user) {
-            return response()
-                ->redirect()
-                ->route('petugas.index')
+            return Redirect::route('petugas.index')
                 ->with([
                     'success' => 'Petugas baru ditambahkan'
                 ]);
         } else {
-            return response()
-                ->redirect()
-                ->back()
+            return Redirect::back()
                 ->withInput()
                 ->with([
                     'error' => 'Petugas gagal ditambahkan'
                 ]);
         }
-
-        // Alert::success('Berhasil', 'Petugas baru ditambahkan');
-        // return redirect('admin/petugas');
     }
 
     /**
@@ -143,6 +139,7 @@ class PetugasController extends Controller
             'email' => 'required|string|email|max:255|unique:users,email,' . $id,
             'phone' => 'required|string|max:15',
             'cabang' => 'required|string',
+            'roles' => 'required|in:ADMIN',
             'password' => 'required|string|confirmed|min:8',
         ]);
 
@@ -153,19 +150,18 @@ class PetugasController extends Controller
         $petugas->email = $request->email;
         $petugas->phone = $request->phone;
         $petugas->cabang = $request->cabang;
+        $petugas->roles = $request->roles;
         if ($request->filled('password')) {
             $petugas->password = Hash::make($request->password);
         }
 
         if ($petugas->update()) {
-            return redirect()
-                ->route('petugas.index')
+            return Redirect::route('petugas.index')
                 ->with([
                     'success' => 'Petugas berhasil diupdate'
                 ]);
         } else {
-            return redirect()
-                ->back()
+            return Redirect::back()
                 ->withInput()
                 ->with([
                     'error' => 'Petugas gagal diupdate'
@@ -184,14 +180,12 @@ class PetugasController extends Controller
         $petugas = User::findOrFail($id);
 
         if ($petugas->delete()) {
-            return redirect()
-                ->route('petugas.index')
+            return Redirect::route('petugas.index')
                 ->with([
                     'success' => 'Petugas ' .$petugas->name. ' berhasil dihapus'
                 ]);
         } else {
-            return redirect()
-                ->back()
+            return Redirect::back()
                 ->withInput()
                 ->with([
                     'error' => 'Petugas ' .$petugas->name. ' gagal dihapus'

@@ -17,7 +17,7 @@ class CreateTanggapanTable extends Migration
             $table->id();
             $table->integer('pengaduan_id');
             $table->string('tanggapan', 255);
-            $table->string('feedback');
+            $table->string('feedback')->nullable();
             $table->timestamps();
         });
     }

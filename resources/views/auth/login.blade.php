@@ -19,7 +19,7 @@
 
             <!-- NIK -->
             <div>
-                <x-label for="nik" :value="__('NIK')" />
+                <x-label for="nik" :value="__('NRIK')" />
 
                 <x-input id="nik" class="block mt-1 w-full" type="text" name="nik" :value="old('nik')"
                     required autofocus />

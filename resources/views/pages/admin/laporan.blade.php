@@ -80,8 +80,8 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="7" class="text-center text-gray-400">
-                                        Data Kosong
+                                    <td colspan="7" class="text-center text-gray-600">
+                                        Tidak ada data.
                                     </td>
                                 </tr>
                             @endforelse

@@ -61,6 +61,14 @@
                             class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-textarea focus:border-red-400 focus:outline-none focus:shadow-outline-red dark:focus:shadow-outline-gray"
                             type="text" placeholder="0123456789" value="{{ $petugas->phone }}" name="phone"></input>
                     </label>
+
+                    <label class="block mt-4 text-sm">
+                        <span class="text-gray-700 dark:text-gray-400">Roles</span>
+                        <input
+                            class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-textarea focus:border-red-400 focus:outline-none focus:shadow-outline-red dark:focus:shadow-outline-gray"
+                            type="text" placeholder="Roles" value="{{ $petugas->roles }}" name="roles"></input>
+                    </label>
+
                     <label class="block mt-4 text-sm">
                         <span class="text-gray-700 dark:text-gray-400">Password</span>
                         <input

@@ -15,10 +15,9 @@
                     @foreach ($item->details as $ite)
                         <div class="row w-full">
                             <div class="col-md-3">
-                                @if (empty($tangap->feedback))
-                                    <div class="mx-3 mt-4 px-2 alert alert-danger text-center text-xs font-bold">Belum ada
-                                        feedback dari HBL</div>
-                                @else
+                                @if (is_null($tangap) || is_null($tangap->feedback))
+                                    <div class="mx-3 mt-4 px-2 alert alert-primary text-center text-xs font-bold">Di Proses</div>
+                                @elseif (empty($tangap->feedback))
                                     <h3 class="my-3 font-semibold mx-3 dark:text-gray-300">Berkas</h3>
                                     <img src="/assets/img/pdf-svg.svg" class="img-fluid mb-2 w-auto" loading="lazy"
                                         alt="Berkas">
